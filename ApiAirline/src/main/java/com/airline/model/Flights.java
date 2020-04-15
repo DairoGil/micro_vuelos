@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Flights {
@@ -13,6 +15,8 @@ public class Flights {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int numflight;
+	@ManyToOne(targetEntity = Airplanes.class)
+	@JoinColumn(name="planecode")
 	private int planecode;
 	private Date dateflight;
 	private String origin;

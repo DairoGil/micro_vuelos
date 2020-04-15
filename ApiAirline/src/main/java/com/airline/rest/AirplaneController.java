@@ -36,17 +36,6 @@ public class AirplaneController {
 		repository.save(airplane);
 	}
 
-	@PutMapping(path = "/update")
-	public void update(@RequestParam int id, @RequestParam String description, @RequestParam int capacity) {
-		Airplanes airplane = new Airplanes();
-		airplane.setPlanecode(id);
-		airplane.setDescription(description);
-		airplane.setCapacity(capacity);
-		if (airplane != null) {
-			repository.save(airplane);
-		}
-	}
-
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		repository.deleteById(id);
