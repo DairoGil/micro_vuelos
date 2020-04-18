@@ -26,4 +26,9 @@ public interface IPassengerRepo extends JpaRepository<Passenger, Integer>{
 	@Query(value="INSERT INTO passenger (id, namep, birthdate, email, telephone) VALUES (:id, :namep, :birthdate, :email, :telephone)", nativeQuery = true)
     public void addPassenger(@Param("id") int id, @Param("namep") String namep, @Param("birthdate") String birthdate,
 			@Param("email") String email, @Param("telephone") int telephone);
+	
+	@Modifying
+	@Query(value="UPDATE passenger SET namep = :namep,  birthdate = :birthdate, email = :email, telephone = :telephone  WHERE id= :id", nativeQuery = true)
+    public void updatePassenger(@Param("id") int id, @Param("telephone") int telephone, @Param("namep") String namep,
+			@Param("birthdate") String birthdate, @Param("email") String email);
 }

@@ -15,4 +15,9 @@ public interface IFlightRepo extends JpaRepository<Flights, Integer>{
 	@Query(value="INSERT INTO flights (planecode, dateflight, origin, destination) VALUES (:planecode, :dateFlight, :origin, :destination)", nativeQuery = true)
     public void addFlight(@Param("planecode") int planecode, @Param("dateFlight") String dateFlight,
 			@Param("origin") String origin, @Param("destination") String destination);
+	
+	@Modifying
+	@Query(value="UPDATE flights SET planecode = :planecode,  dateflight = :dateFlight, origin = :origin, destination = :destination  WHERE numflight= :numflight", nativeQuery = true)
+    public void updateFlight(@Param("numflight") int numflight, @Param("planecode") int planecode, @Param("dateFlight") String dateFlight,
+			@Param("origin") String origin, @Param("destination") String destination);
 }
