@@ -11,9 +11,9 @@ public class Passenger {
 	@Id
 	private int id;
 	private String namep;
-	private Date birthdate;
+	private String birthdate;
 	private String email;
-	private int telephone;
+	private String telephone;
 	
 	public int getId() {
 		return id;
@@ -27,10 +27,10 @@ public class Passenger {
 	public void setName(String name) {
 		this.namep = name;
 	}
-	public Date getBirthdate() {
+	public String getBirthdate() {
 		return birthdate;
 	}
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 	public String getEmail() {
@@ -39,10 +39,10 @@ public class Passenger {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 }

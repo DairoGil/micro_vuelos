@@ -1,5 +1,7 @@
 package com.airline.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +13,9 @@ import com.airline.model.Flights;
 @Transactional
 public interface IFlightRepo extends JpaRepository<Flights, Integer>{
 
+	@Query(value="select * from flights where numflight=:num_flight", nativeQuery = true)
+    public List<Flights> findFlight(@Param("num_flight") int id);
+	
 	@Modifying
 	@Query(value="INSERT INTO flights (planecode, dateflight, origin, destination) VALUES (:planecode, :dateFlight, :origin, :destination)", nativeQuery = true)
     public void addFlight(@Param("planecode") int planecode, @Param("dateFlight") String dateFlight,

@@ -11,7 +11,7 @@ public class Flights {
 	@Id
 	private int numflight;
 	private int planecode;
-	private Date dateflight;
+	private String dateflight;
 	private String origin;
 	private String destination;
 	
@@ -27,11 +27,11 @@ public class Flights {
 	public void setPlanecode(int planecode) {
 		this.planecode = planecode;
 	}
-	public Date getDateFlight() {
+	public String getDateflight() {
 		return dateflight;
 	}
-	public void setDateFlight(Date dateFlight) {
-		this.dateflight = dateFlight;
+	public void setDateflight(String dateflight) {
+		this.dateflight = dateflight;
 	}
 	public String getOrigin() {
 		return origin;

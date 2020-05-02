@@ -1,24 +1,26 @@
 package com.airline.rest;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.airline.model.Passenger;
+import com.airline.model.Passengerlist;
 import com.airline.repo.IPassengerListRepo;
 import com.airline.repo.IPassengerRepo;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/passenger")
 public class PassengerController {
 
@@ -46,19 +48,23 @@ public class PassengerController {
 	}
 	
 	@PostMapping(path = "/add")
-	public @ResponseBody String addNewPassenger(@RequestParam int id, @RequestParam String namep,
-			@RequestParam String birthdate, @RequestParam String email, @RequestParam int telephone,
-			@RequestParam int numflight) {
-		repository.addPassenger(id, namep, birthdate, email, telephone);
-		listRepo.addPassenger(numflight, id);
+	public @ResponseBody String addNewPassenger(@RequestBody Passenger passenger) {
+		repository.addPassenger(passenger.getId(), passenger.getName(), passenger.getBirthdate(), passenger.getEmail(), passenger.getTelephone());
 		return "Se ha creado el pasajero exitosamente";
 	}
 	
+	@PostMapping(path = "/addList")
+	public void addList(@RequestBody Passengerlist passengerlist) {
+		System.out.println(passengerlist);
+		System.out.println(passengerlist.getNumFlight()+" "+passengerlist.getIdPassenger());
+		listRepo.addPassenger(passengerlist.getNumFlight(), passengerlist.getIdPassenger());
+	}
+	
+	
 	@PostMapping(path = "/update")
-	public @ResponseBody String updatePassenger(@RequestParam int id, @RequestParam String namep,
-			@RequestParam String birthdate, @RequestParam String email, @RequestParam int telephone) {
-		if(repository.existsById(id)) {
-			repository.updatePassenger(id, telephone, namep, birthdate, email);
+	public @ResponseBody String updatePassenger(@RequestBody Passenger passenger) {
+		if(repository.existsById(passenger.getId())) {
+			repository.updatePassenger(passenger.getId(),  passenger.getTelephone(), passenger.getName(), passenger.getBirthdate(), passenger.getEmail());
 			return "Se ha actualizado el pasajero exitosamente.";
 		}else {	
 			return "El registro a actualizar no existe";
